@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button{
+            border: none;
+            border-radius: 10px;
+            background-color: rgb(139, 69, 224);
+            color: white;
+            padding: 10px 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">%</button>
+</body>
+</html>
+<script>
+    let btn =document.getElementById("btn")
+    if ('getBattery' in navigator) {
+  navigator.getBattery().then(function(battery) {
+    console.log(battery.level*100)
+    function updateBatteryStatus() {
+      btn.innerText= battery.level * 100 + " % ";
+      
+    }
+    
+    // Initial status
+    updateBatteryStatus();
+
+    // Update status when the battery level changes
+    battery.addEventListener('levelchange', updateBatteryStatus);
+
+   
+  });
+} else {
+  bt.innerText=("Battery Status API is not supported on this browser.");
+}
+
+</script>
