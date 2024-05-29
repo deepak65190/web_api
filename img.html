@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Network Status Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    h1 {
+      color: #333;
+    }
+    #network-status {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Network Status Checker</h1>
+  <button id="network-status">Checking network status...</button>
+ 
+  <script>
+    // Get the network status element
+    const networkStatusElement = document.getElementById('network-status');
+
+    // Function to update network status
+    function updateNetworkStatus() {
+      if (navigator.onLine) {
+        networkStatusElement.textContent = 'You are online!';
+        networkStatusElement.style.backgroundColor = 'green';
+        networkStatusElement.style.color = 'white';
+      } else {
+        networkStatusElement.textContent = 'You are offline.';
+        networkStatusElement.style.backgroundColor = 'red';
+        networkStatusElement.style.color = 'white';
+      }
+    }
+
+    // Initial check
+    updateNetworkStatus();
+
+    // Add event listeners for online and offline events
+    window.addEventListener('online', updateNetworkStatus);
+    window.addEventListener('offline', updateNetworkStatus);
+  </script>
+</body>
+</html>
