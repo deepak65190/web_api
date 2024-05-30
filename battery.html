@@ -44,13 +44,15 @@
     
     console.log(battery.level*100)
     function updateBatteryStatus() {
-      btn.innerText= battery.level * 100 + " % "  ;
+      let l=Math.round(battery.level*100)
+      
+      btn.innerText=l + " % "  ;
 
 if(battery.charging){
-  btn.innerText= battery.level * 100 + " % "  + "Charging";
+  btn.innerText= l+ " % "  + "Charging";
   btn.style.backgroundColor="green"
 }else{
-  btn.innerText= battery.level * 100 + " % "  + "Not Charging";
+  btn.innerText= l + " % "  + "Not Charging";
   btn.style.backgroundColor="red"
 }
       console.log(battery.charging)
