@@ -3,33 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Battery Api</title>
     <style>
-        button{
+       body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        button {
             border: none;
             border-radius: 10px;
             background-color: rgb(139, 69, 224);
             color: white;
             padding: 10px 40px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
             font-size: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: rgb(104, 44, 169);
+            transform: scale(1.05);
+        }
+        button:active {
+            transform: scale(1);
         }
     </style>
 </head>
 <body>
-    <button id="btn">%</button>
+    <button id="btn">Battery</button>
 </body>
 </html>
 <script>
     let btn =document.getElementById("btn")
     if ('getBattery' in navigator) {
   navigator.getBattery().then(function(battery) {
+    
     console.log(battery.level*100)
     function updateBatteryStatus() {
-      btn.innerText= battery.level * 100 + " % ";
-      
+      btn.innerText= battery.level * 100 + " % "  ;
+
+if(battery.charging){
+  btn.innerText= battery.level * 100 + " % "  + "Charging";
+  btn.style.backgroundColor="green"
+}else{
+  btn.innerText= battery.level * 100 + " % "  + "Not Charging";
+  btn.style.backgroundColor="red"
+}
+      console.log(battery.charging)
     }
     
     // Initial status
@@ -37,6 +61,7 @@
 
     // Update status when the battery level changes
     battery.addEventListener('levelchange', updateBatteryStatus);
+    battery.addEventListener('chargingchange', updateBatteryStatus);
 
    
   });
